@@ -1,41 +1,28 @@
-<?php
-    if(!isset($_SESSION)) session_start();
-
-    
-    if( $_SESSION['usernivel'] != 3 ) {
-        session_destroy();
-        header("Location: index.php");
-    }
-?>
-
 <html>
-<title>Remover Usuário</title>
-<h1>Remover Usuário</h1>
+<title>Editar Usuário</title>
+<h1>EditarUsuário</h1>
 
 
 <table border="1">
 <tr>
-<th>Nome</th><th>Login</th><th>Nível</th><th></th>
+<th>Nome</th><th>Login</th><th>Papel</th><th>Centro de Apoio</th><th></th>
 </tr>
 
 <?php
- include 'confdb.php';
-       include 'utils.php';
-       $query = "SELECT * FROM user WHERE 1 ORDER BY nome";
-       $result = mysqli_query($conn, $query);
-       if (!$result) {
-            $message  = 'Invalid query: ' . mysqli_error($conn) . "\n";
-            $message .= 'Whole query: ' . $query;
-            die($message);
-       }
+        ini_set('display_errors', 1);
+        ini_set('display_startup_errors', 1);
+        error_reporting(E_ALL);
+        include '../model/admin_dao.php';
+        $usuarios = getUsuarios();
        
-       while (($row = mysqli_fetch_assoc($result))  ) {
+        foreach ( $usuarios as $row ) {
             $nome = $row['nome'];
             $login = $row['login'];           
-            $nivel = translate_user( $row['nivel'] );                       
+            $papel = $row['papel'];                       
             $id = $row['id'];
+            $centro = getCentroNomeById( $row['id_centro'] );
 
-            echo "<tr><td>$nome</td><td>$login</td><td>$nivel</td><td><a href='admin_edit_user_form.php?id=$id'>editar</a></td></tr>";
+            echo "<tr><td>$nome</td><td>$login</td><td>$papel</td><td>$centro</td><td><a href='admin_edit_user_form.php?id=$id'>editar</a></td></tr>";
        }
 
 ?>
@@ -43,7 +30,7 @@
 <br>
 <?php 
 
-    include "links_admin.php";
+    include "../view/admin_links.php";
 ?>
 
 </html>

@@ -1,26 +1,122 @@
 <?php
+
+include '../../globals/configdb.php';
+
 function existUser($login ) {
-    include '../../globals/configdb.php';
     
-    $sql = "SELECT `id`, `nome` FROM `usuario` WHERE (`login` = '".$login ."') LIMIT 1";
-    $query = mysqli_query($conn, $sql);
+    $db = new SQLite3( '../../database/doacoespet.db' );
     
+    $sql = "SELECT id FROM usuario WHERE (login = '".$login ."') LIMIT 1";
+    $results = $db->query( $sql );
+    $count = 0;
+    while ($row = $results->fetchArray()) {
+        $count++;
+    }
     
-    if (mysqli_num_rows($query) == 1) {
+    if ($count == 1) {
         return true;    
     }
     
     return false;
 }
 
-function insertUser($nome, $login, $pass, $papel, $id_centro) {
+
+function getCentros() {
     
-    include '../../globals/configdb.php';
+    $db = new SQLite3( '../../database/doacoespet.db' );
     
-    $query = "INSERT INTO usuario(nome, login, pass, papel, id_centro, ativo) VALUES('$nome', '$login', '$pass', '$papel','$id_centro', '1' )";
+    $sql = "SELECT * FROM centro_apoio ORDER BY nome DESC";
+    $results = $db->query( $sql );
+    $arr = array();
+    $i = 0;
+    while ($row = $results->fetchArray()) {
+        $arr[$i] = $row;
+        $i++;  
+    }
     
-    mysqli_query($conn, $query) or die("Erro no insert user");
+    return $arr;
     
 }
+
+function getCentroNomeById( $id_centro) {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "SELECT nome, endereco, id  FROM centro_apoio WHERE id=$id_centro";
+    $results = $db->query( $sql );
+    $arr = array();
+    $i = 0;
+    while ($row = $results->fetchArray()) {
+        return $row['nome'];
+    }
+    
+    return null;
+    
+}
+
+
+function getUsuarios() {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "SELECT * FROM usuario ORDER BY nome DESC";
+    $results = $db->query( $sql );
+    $arr = array();
+    $i = 0;
+    while ($row = $results->fetchArray()) {
+        $arr[$i] = $row;
+        $i++;  
+    }
+    
+    return $arr;
+    
+}
+
+function getUsuario( $id ) {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "SELECT * FROM usuario WHERE id='$id'";
+    $results = $db->query( $sql );
+    if ($row = $results->fetchArray() ) {
+        return $row;
+    }
+    
+    return null;
+    
+}
+
+function insertUser($nome, $login, $pass, $papel, $id_centro) {
+    
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "INSERT INTO usuario(nome, login, pass, papel, id_centro, ativo) VALUES('$nome', '$login', '$pass', '$papel','$id_centro', '1' )";
+    
+    return $db->exec( $sql );
+    
+}
+
+
+function updateUser($id, $nome, $login, $pass, $papel, $id_centro) {
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    if( $pass != "" ) {
+        $sql = "UPDATE usuario SET nome='$nome', login='$login', pass='$pass', papel='$papel', id_centro='$id_centro' WHERE id='$id'";
+    } else {
+        $sql = "UPDATE usuario SET nome='$nome', login='$login', papel='$papel', id_centro='$id_centro' WHERE id='$id'";
+    }
+    return $db->exec( $sql );
+    
+}
+
+function insertCentro($nome, $endereco, $nome_contato, $telefone_contato) {
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    $sql = "INSERT INTO centro_apoio(nome, endereco, nome_contato, telefone_contato) VALUES('$nome', '$endereco', '$nome_contato', '$telefone_contato' )";
+    return $db->exec( $sql );
+    
+}
+
+
+
     
 ?>

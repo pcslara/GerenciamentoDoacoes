@@ -1,5 +1,8 @@
 <html>
-Login
+    <?php
+        include 'globals/configdb.php'
+    ?>
+
 </html>
 
 
