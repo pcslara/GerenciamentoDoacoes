@@ -97,6 +97,7 @@ function getUsuarioByLogin( $login ) {
     
     return null;
 }
+
 function insertProduto($nome, $unidade_medida) {
     
     
