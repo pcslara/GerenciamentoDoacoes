@@ -1,3 +1,7 @@
+<?php
+    include '../controller/admin_isauthuser.php';
+?>
+
 <html>
 <title>Adicionar Usuário</title>
 <h1>Adicionar Usuário</h1>

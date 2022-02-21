@@ -1,6 +1,5 @@
 <?php
 
-include '../../globals/configdb.php';
 
 function existUser($login ) {
     
@@ -86,6 +85,20 @@ function getUsuario( $id ) {
     
 }
 
+function getUsuarioByLogin( $login ) {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "SELECT * FROM usuario WHERE login='$login'";
+    $results = $db->query( $sql );
+    if ($row = $results->fetchArray() ) {
+        return $row;
+    }
+    
+    return null;
+    
+}
+
 function insertUser($nome, $login, $pass, $papel, $id_centro) {
     
     
@@ -97,6 +110,19 @@ function insertUser($nome, $login, $pass, $papel, $id_centro) {
     
 }
 
+function canLogin( $login, $pass ) {
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "SELECT * FROM usuario WHERE login='$login' AND pass='$pass'";
+    $results = $db->query( $sql );
+    
+    if ($row = $results->fetchArray()) {
+        return true;  
+    }
+    
+    return false;
+    
+}
 
 function updateUser($id, $nome, $login, $pass, $papel, $id_centro) {
     $db = new SQLite3( '../../database/doacoespet.db' );

@@ -1,5 +1,7 @@
 <html>
 <?php
+
+    include 'admin_isauthuser.php';
     
 
     if ( empty($_POST) OR empty($_POST['nome']) OR empty($_POST['endereco']) ) {

@@ -1,6 +1,5 @@
 <?php
-    include 'isauthuser.php';
-    include 'header.php';
+    include '../controller/admin_isauthuser.php';
     header('Content-Type: text/html; charset=utf-8');
 ?>	
 
