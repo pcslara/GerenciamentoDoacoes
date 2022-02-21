@@ -85,7 +85,6 @@ function getUsuario( $id ) {
     
 }
 
-<<<<<<< HEAD
 function getUsuarioByLogin( $login ) {
     
     $db = new SQLite3( '../../database/doacoespet.db' );
@@ -97,7 +96,6 @@ function getUsuarioByLogin( $login ) {
     }
     
     return null;
-=======
 function insertProduto($nome, $unidade_medida) {
     
     
@@ -106,7 +104,6 @@ function insertProduto($nome, $unidade_medida) {
     $sql = "INSERT INTO produto(nome, unidade_medida) VALUES('$nome', '$unidade_medida')";
     
     return $db->exec( $sql );
->>>>>>> 2077fcefe33ffbf34cb9ef4f574ff900d27b714f
     
 }
 
