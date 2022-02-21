@@ -86,6 +86,17 @@ function getUsuario( $id ) {
     
 }
 
+function insertProduto($nome, $unidade_medida) {
+    
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "INSERT INTO produto(nome, unidade_medida) VALUES('$nome', '$unidade_medida')";
+    
+    return $db->exec( $sql );
+    
+}
+
 function insertUser($nome, $login, $pass, $papel, $id_centro) {
     
     
