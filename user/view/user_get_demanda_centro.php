@@ -1,6 +1,6 @@
 <?php
-    include 'isauthuser.php';
-    include 'header.php';
+    #include 'isauthuser.php';
+    #include 'header.php';
     header('Content-Type: text/html; charset=utf-8');
    include '../model/user_dao.php';
 
@@ -40,6 +40,7 @@
    ?>
 </table>
 
+<a href="../../user/view/user_main.php">Nova consulta</a>
   
 </html>
 

@@ -1,6 +1,6 @@
 <?php
-    include 'isauthuser.php';
-    include 'header.php';
+    #include 'isauthuser.php';
+    #include 'header.php';
     header('Content-Type: text/html; charset=utf-8');
    include '../model/user_dao.php';
 
@@ -24,5 +24,6 @@
   </select><br>
   <input type="submit"  value="Consultar">
 </form><br>
+
   
 </html>

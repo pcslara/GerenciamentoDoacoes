@@ -2,6 +2,23 @@
 
 include '../../globals/configdb.php';
 
+function getCentros() {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "SELECT * FROM centro_apoio ORDER BY nome DESC";
+    $results = $db->query( $sql );
+    $arr = array();
+    $i = 0;
+    while ($row = $results->fetchArray()) {
+        $arr[$i] = $row;
+        $i++;  
+    }
+    
+    return $arr;
+    
+}
+
 function getProdutos() {
     
     $db = new SQLite3( '../../database/doacoespet.db' );

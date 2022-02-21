@@ -14,6 +14,9 @@
         	<input type="password" name="pass" placeholder="Password...">
             <button type="submit" >Sign in!</button>
 	    </form>
+
+
+    <iframe src="user/view/user_main.php" style="height:100%;width:100%;border:none" title="description"></iframe> 
     
     
 
