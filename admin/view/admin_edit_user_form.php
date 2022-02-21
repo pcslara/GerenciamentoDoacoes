@@ -56,7 +56,7 @@
   
   <input type="hidden" name="id" id="id" value="<?php echo $id;?>">
   <input type="submit"  value="Salvar">
-  <a href="">Remover</a>
+  <a href="../controller/admin_remove_user.php?id=">Remover</a>
 </form>
 
 </html>

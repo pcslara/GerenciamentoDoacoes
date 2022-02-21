@@ -1,6 +1,5 @@
 <?php
 
-include '../../globals/configdb.php';
 
 function existUser($login ) {
     
@@ -86,6 +85,19 @@ function getUsuario( $id ) {
     
 }
 
+<<<<<<< HEAD
+function getUsuarioByLogin( $login ) {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "SELECT * FROM usuario WHERE login='$login'";
+    $results = $db->query( $sql );
+    if ($row = $results->fetchArray() ) {
+        return $row;
+    }
+    
+    return null;
+=======
 function insertProduto($nome, $unidade_medida) {
     
     
@@ -94,6 +106,7 @@ function insertProduto($nome, $unidade_medida) {
     $sql = "INSERT INTO produto(nome, unidade_medida) VALUES('$nome', '$unidade_medida')";
     
     return $db->exec( $sql );
+>>>>>>> 2077fcefe33ffbf34cb9ef4f574ff900d27b714f
     
 }
 
@@ -108,6 +121,19 @@ function insertUser($nome, $login, $pass, $papel, $id_centro) {
     
 }
 
+function canLogin( $login, $pass ) {
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "SELECT * FROM usuario WHERE login='$login' AND pass='$pass'";
+    $results = $db->query( $sql );
+    
+    if ($row = $results->fetchArray()) {
+        return true;  
+    }
+    
+    return false;
+    
+}
 
 function updateUser($id, $nome, $login, $pass, $papel, $id_centro) {
     $db = new SQLite3( '../../database/doacoespet.db' );
