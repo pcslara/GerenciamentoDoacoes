@@ -21,7 +21,7 @@
   <input type="text" name="senha" id="senha"><br>
   Tipo de usuário (atenção!):<br>
   <select id="papel" name="papel">
-      <option value="GERENTE">Gerente de Ponto de Apoio</option>
+      <option value="GERENTE">Gerente de Centro de Apoio</option>
       <option value="ADMIN">Adminstrador</option>
   </select><br>
   Centro de Apoio:<br>
