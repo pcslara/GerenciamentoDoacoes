@@ -22,11 +22,18 @@
     $papel = addslashes( $_POST['papel'] );
     $id_centro = addslashes( $_POST['id_centro'] );
     
-    
-    if( updateUser( $id, $nome, $login, $pass, $papel, $id_centro) ) {
-        echo "Usuário atualizado com sucesso!<br><br>";
-    } else {
-        echo "Erro ao atualizar o usuário!<br><br>";
+    if( $_POST['action'] == "Salvar" ) {
+        if( updateUser( $id, $nome, $login, $pass, $papel, $id_centro) ) {
+            echo "Usuário atualizado com sucesso!<br><br>";
+        } else {
+            echo "Erro ao atualizar o usuário!<br><br>";
+        }
+    } else if( $_POST['action'] == "Remover" ) {
+        if( removerUsuario( $id ) ) {
+             echo "Usuário $id removido com sucesso !<br><br>";
+        } else {
+             echo "Erro ao remover o usuário!<br><br>";
+        }    
     }
 
 links:

@@ -43,20 +43,21 @@
       <?php
         $centros = getCentros();
         foreach ($centros as $centro ) {
-            $id = $centro['id'];
+            $id_centro_local = $centro['id'];
             $nome = $centro['nome'];
-            if( $id_centro == $id )
-                echo "<option selected='selected' value=\"$id\">$nome</option>";
+            if( $id_centro == $id_centro_local )
+                echo "<option selected='selected' value=\"$id_centro_local\">$nome</option>";
             else
-                echo "<option value=\"$id\">$nome</option>";
+                echo "<option value=\"$id_centro_local\">$nome</option>";
         }
       ?>
   </select><br>
     
   
   <input type="hidden" name="id" id="id" value="<?php echo $id;?>">
-  <input type="submit"  value="Salvar">
-  <a href="../controller/admin_remove_user.php?id=">Remover</a>
+  <input type="submit" name="action" value="Salvar">
+  <input type="submit" name="action" value="Remover">
+  
 </form>
 
 </html>

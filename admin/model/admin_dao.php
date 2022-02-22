@@ -85,6 +85,16 @@ function getUsuario( $id ) {
     
 }
 
+function removerUsuario( $id ) {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "DELETE FROM usuario WHERE id='$id'";
+    
+    return $db->exec( $sql );
+    
+}
+
 function getUsuarioByLogin( $login ) {
     
     $db = new SQLite3( '../../database/doacoespet.db' );
