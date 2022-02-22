@@ -36,6 +36,61 @@ function getCentros() {
     return $arr;
     
 }
+function removeCentro( $id ) {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "DELETE FROM centro_apoio WHERE id='$id'";
+    
+    return $db->exec( $sql );
+    
+}
+function updateCentro( $id, $nome, $nome_contato, $telefone_contato, $endereco ) {
+
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    $sql = "UPDATE centro_apoio SET nome='$nome', nome_contato='$nome_contato', telefone_contato='$telefone_contato', endereco='$endereco' WHERE id='$id'";
+    return $db->exec( $sql );
+}
+
+function updateProduto( $id, $nome, $unidade_medida ) {
+
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    $sql = "UPDATE produto SET nome='$nome', unidade_medida='$unidade_medida' WHERE id='$id'";
+    return $db->exec( $sql );
+}
+
+
+function getCentro( $id_centro) {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "SELECT * FROM centro_apoio WHERE id=$id_centro";
+    $results = $db->query( $sql );
+    $arr = array();
+    $i = 0;
+    if ($row = $results->fetchArray()) {
+        return $row;
+    }
+    
+    return null;
+    
+}
+
+function getProduto( $id) {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "SELECT * FROM produto WHERE id=$id";
+    $results = $db->query( $sql );
+    $arr = array();
+    $i = 0;
+    if ($row = $results->fetchArray()) {
+        return $row;
+    }
+    
+    return null;
+    
+}
 
 function getCentroNomeById( $id_centro) {
     
@@ -71,6 +126,21 @@ function getUsuarios() {
     
 }
 
+function getProdutos() {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "SELECT * FROM produto ORDER BY nome DESC";
+    $results = $db->query( $sql );
+    $arr = array();
+    $i = 0;
+    while ($row = $results->fetchArray()) {
+        $arr[$i] = $row;
+        $i++;  
+    }
+    return $arr;
+}
+
 function getUsuario( $id ) {
     
     $db = new SQLite3( '../../database/doacoespet.db' );
@@ -90,6 +160,16 @@ function removerUsuario( $id ) {
     $db = new SQLite3( '../../database/doacoespet.db' );
     
     $sql = "DELETE FROM usuario WHERE id='$id'";
+    
+    return $db->exec( $sql );
+    
+}
+
+function removeProduto( $id ) {
+    
+    $db = new SQLite3( '../../database/doacoespet.db' );
+    
+    $sql = "DELETE FROM produto WHERE id='$id'";
     
     return $db->exec( $sql );
     
