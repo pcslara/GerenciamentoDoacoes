@@ -1,9 +1,15 @@
 <html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+</head>
+
 <title>Editar Usuário</title>
-<h1>EditarUsuário</h1>
+<h1>Editar Usuário</h1>
 
 
-<table border="1">
+<table class="table is-bordered">
 <tr>
 <th>Nome</th><th>Login</th><th>Papel</th><th>Centro de Apoio</th><th></th>
 </tr>

@@ -3,12 +3,11 @@
 
 function existUser($login ) {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "SELECT id FROM usuario WHERE (login = '".$login ."') LIMIT 1";
-    $results = $db->query( $sql );
     $count = 0;
-    while ($row = $results->fetchArray()) {
+    foreach ( $db->query( $sql ) as $row) {
         $count++;
     }
     
@@ -22,13 +21,13 @@ function existUser($login ) {
 
 function getCentros() {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "SELECT * FROM centro_apoio ORDER BY nome DESC";
-    $results = $db->query( $sql );
+    
     $arr = array();
     $i = 0;
-    while ($row = $results->fetchArray()) {
+    foreach ( $db->query( $sql ) as $row) {
         $arr[$i] = $row;
         $i++;  
     }
@@ -38,7 +37,7 @@ function getCentros() {
 }
 function removeCentro( $id ) {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "DELETE FROM centro_apoio WHERE id='$id'";
     
@@ -47,14 +46,14 @@ function removeCentro( $id ) {
 }
 function updateCentro( $id, $nome, $nome_contato, $telefone_contato, $endereco ) {
 
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     $sql = "UPDATE centro_apoio SET nome='$nome', nome_contato='$nome_contato', telefone_contato='$telefone_contato', endereco='$endereco' WHERE id='$id'";
     return $db->exec( $sql );
 }
 
 function updateProduto( $id, $nome, $unidade_medida ) {
 
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     $sql = "UPDATE produto SET nome='$nome', unidade_medida='$unidade_medida' WHERE id='$id'";
     return $db->exec( $sql );
 }
@@ -62,13 +61,10 @@ function updateProduto( $id, $nome, $unidade_medida ) {
 
 function getCentro( $id_centro) {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "SELECT * FROM centro_apoio WHERE id=$id_centro";
-    $results = $db->query( $sql );
-    $arr = array();
-    $i = 0;
-    if ($row = $results->fetchArray()) {
+    foreach ( $db->query( $sql ) as $row){
         return $row;
     }
     
@@ -78,13 +74,12 @@ function getCentro( $id_centro) {
 
 function getProduto( $id) {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "SELECT * FROM produto WHERE id=$id";
-    $results = $db->query( $sql );
     $arr = array();
     $i = 0;
-    if ($row = $results->fetchArray()) {
+    foreach ( $db->query( $sql ) as $row) {
         return $row;
     }
     
@@ -94,13 +89,12 @@ function getProduto( $id) {
 
 function getCentroNomeById( $id_centro) {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "SELECT nome, endereco, id  FROM centro_apoio WHERE id=$id_centro";
-    $results = $db->query( $sql );
     $arr = array();
     $i = 0;
-    while ($row = $results->fetchArray()) {
+    foreach ( $db->query( $sql ) as $row) {
         return $row['nome'];
     }
     
@@ -111,13 +105,12 @@ function getCentroNomeById( $id_centro) {
 
 function getUsuarios() {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "SELECT * FROM usuario ORDER BY nome DESC";
-    $results = $db->query( $sql );
     $arr = array();
     $i = 0;
-    while ($row = $results->fetchArray()) {
+    foreach ( $db->query( $sql ) as $row) {
         $arr[$i] = $row;
         $i++;  
     }
@@ -128,13 +121,13 @@ function getUsuarios() {
 
 function getProdutos() {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "SELECT * FROM produto ORDER BY nome DESC";
-    $results = $db->query( $sql );
+   
     $arr = array();
     $i = 0;
-    while ($row = $results->fetchArray()) {
+    foreach ( $db->query( $sql ) as $row){
         $arr[$i] = $row;
         $i++;  
     }
@@ -143,11 +136,10 @@ function getProdutos() {
 
 function getUsuario( $id ) {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "SELECT * FROM usuario WHERE id='$id'";
-    $results = $db->query( $sql );
-    if ($row = $results->fetchArray() ) {
+    foreach ( $db->query( $sql ) as $row) {
         return $row;
     }
     
@@ -157,7 +149,7 @@ function getUsuario( $id ) {
 
 function removerUsuario( $id ) {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "DELETE FROM usuario WHERE id='$id'";
     
@@ -167,7 +159,7 @@ function removerUsuario( $id ) {
 
 function removeProduto( $id ) {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "DELETE FROM produto WHERE id='$id'";
     
@@ -177,11 +169,11 @@ function removeProduto( $id ) {
 
 function getUsuarioByLogin( $login ) {
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "SELECT * FROM usuario WHERE login='$login'";
-    $results = $db->query( $sql );
-    if ($row = $results->fetchArray() ) {
+    
+    foreach ( $db->query( $sql ) as $row) {
         return $row;
     }
     
@@ -191,7 +183,7 @@ function getUsuarioByLogin( $login ) {
 function insertProduto($nome, $unidade_medida) {
     
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "INSERT INTO produto(nome, unidade_medida) VALUES('$nome', '$unidade_medida')";
     
@@ -202,7 +194,7 @@ function insertProduto($nome, $unidade_medida) {
 function insertUser($nome, $login, $pass, $papel, $id_centro) {
     
     
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "INSERT INTO usuario(nome, login, pass, papel, id_centro, ativo) VALUES('$nome', '$login', '$pass', '$papel','$id_centro', '1' )";
     
@@ -211,12 +203,12 @@ function insertUser($nome, $login, $pass, $papel, $id_centro) {
 }
 
 function canLogin( $login, $pass ) {
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     
     $sql = "SELECT * FROM usuario WHERE login='$login' AND pass='$pass'";
-    $results = $db->query( $sql );
     
-    if ($row = $results->fetchArray()) {
+    
+    foreach( $db->query( $sql ) as $row ) {
         return true;  
     }
     
@@ -225,7 +217,7 @@ function canLogin( $login, $pass ) {
 }
 
 function updateUser($id, $nome, $login, $pass, $papel, $id_centro) {
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     if( $pass != "" ) {
         $sql = "UPDATE usuario SET nome='$nome', login='$login', pass='$pass', papel='$papel', id_centro='$id_centro' WHERE id='$id'";
     } else {
@@ -236,7 +228,7 @@ function updateUser($id, $nome, $login, $pass, $papel, $id_centro) {
 }
 
 function insertCentro($nome, $endereco, $nome_contato, $telefone_contato) {
-    $db = new SQLite3( '../../database/doacoespet.db' );
+    $db = new PDO( 'sqlite:../../database/doacoespet.db' );
     $sql = "INSERT INTO centro_apoio(nome, endereco, nome_contato, telefone_contato) VALUES('$nome', '$endereco', '$nome_contato', '$telefone_contato' )";
     return $db->exec( $sql );
     
