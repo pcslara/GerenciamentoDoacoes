@@ -1,5 +1,4 @@
 <?php 
-    session_save_path("/tmp");
     if(!isset($_SESSION)) session_start();
     if (!empty($_POST) AND (empty($_POST['user']) OR empty($_POST['pass']))) {
         header("Location: ../../index.php");
