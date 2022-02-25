@@ -1,5 +1,8 @@
 <?php 
-
+   header('Access-Control-Allow-Origin: *');
+   header('Access-Control-Allow-Methods: GET, POST');
+   header("Access-Control-Allow-Headers: X-Requested-With");
+   
    if(!isset($_SESSION)) session_start();
    if (empty($_POST) OR empty($_POST['user']) OR empty($_POST['pass'])) {
       http_response_code(400);
